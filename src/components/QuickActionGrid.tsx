@@ -86,7 +86,7 @@ export const QuickActionGrid: React.FC<QuickActionGridProps> = ({
       subtitle: `Langsung ke ${CONSULTANT_INFO.name}`,
       icon: PhoneCall,
       color: 'bg-[#F8FAF9] text-[#2B454E] border-[#D8E4E1]',
-      badge: '08:00 - 21:00',
+      badge: CONSULTANT_INFO.hours || '9:00 AM - 6:00 PM',
       badgeColor: 'bg-[#F3EFE6] text-[#50666E] border border-[#E7DECC]',
       href: `tel:${CONSULTANT_INFO.phone}`,
       isExternal: true
