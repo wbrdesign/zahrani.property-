@@ -5,7 +5,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { Property } from '../types';
-import { PROPERTIES } from '../data/listings';
+import { usePropertyContext } from '../context/PropertyContext';
 import { ListingCard } from './ListingCard';
 
 interface FeaturedListingsProps {
@@ -19,6 +19,7 @@ export const FeaturedListings: React.FC<FeaturedListingsProps> = ({
   onSelectProperty,
   onOpenKprWithPrice
 }) => {
+  const { properties } = usePropertyContext();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -32,13 +33,15 @@ export const FeaturedListings: React.FC<FeaturedListingsProps> = ({
     { id: 'tanah', label: 'Tanah Kavling' }
   ];
 
-  const filteredProperties = PROPERTIES.filter((prop) => {
+  const filteredProperties = properties.filter((prop) => {
     const matchesCategory =
       selectedCategory === 'all' || prop.category === selectedCategory;
+    const query = searchQuery.toLowerCase();
     const matchesSearch =
-      prop.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      prop.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      prop.city.toLowerCase().includes(searchQuery.toLowerCase());
+      prop.title.toLowerCase().includes(query) ||
+      prop.location.toLowerCase().includes(query) ||
+      prop.city.toLowerCase().includes(query) ||
+      (prop.district && prop.district.toLowerCase().includes(query));
     return matchesCategory && matchesSearch;
   });
 
@@ -100,7 +103,7 @@ export const FeaturedListings: React.FC<FeaturedListingsProps> = ({
             type="text"
             value={searchQuery}
             onChange={(e) => handleSearchChange(e.target.value)}
-            placeholder="Cari lokasi, cluster, atau area (cth: BSD, Bintaro, Jagakarsa)..."
+            placeholder="Cari lokasi, cluster, atau area (cth: Araya, Ijen, Soekarno-Hatta, Dieng, Lowokwaru)..."
             className="w-full pl-9 sm:pl-10 pr-4 py-2 sm:py-2.5 bg-white border border-[#D8E4E1] rounded-xl text-xs sm:text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-bm-teal focus:border-transparent shadow-2xs"
           />
           {searchQuery && (
