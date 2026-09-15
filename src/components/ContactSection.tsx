@@ -143,7 +143,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
               <div>
                 <div className="font-bold text-xs sm:text-sm text-[#16282E]">Area Wilayah Layanan</div>
                 <div className="text-[11px] sm:text-xs text-[#50666E] mt-0.5 leading-relaxed">
-                  Jakarta Selatan (Jagakarsa, Cilandak, Pondok Indah), BSD City, Serpong, Bintaro Jaya, Alam Sutera, Tangerang Selatan & sekitarnya.
+                  Melayani Transaksi Properti Seluruh Indonesia — Spesialis & Fokus Utama Area Malang Raya & Kota Batu.
                 </div>
               </div>
             </div>
