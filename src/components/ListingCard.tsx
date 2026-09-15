@@ -9,7 +9,7 @@ import {
   Image as ImageIcon
 } from 'lucide-react';
 import { Property } from '../types';
-import { CONSULTANT_INFO } from '../data/mockData';
+import { usePropertyContext } from '../context/PropertyContext';
 import { createWhatsAppLink } from '../utils/formatters';
 
 interface ListingCardProps {
@@ -18,34 +18,28 @@ interface ListingCardProps {
   onSelectProperty: (property: Property) => void;
 }
 
-/**
- * =======================================================================
- * KOMPONEN TAMPILAN KARTU LISTING PROPERTI (HTML KHUSUS LISTING)
- * =======================================================================
- * File ini KHUSUS mengatur tampilan (HTML / JSX) setiap kartu listing:
- * 1. Wadah Foto Properti (tinggi, aspect-ratio, zoom hover effect)
- * 2. Badge Status (Promo DP 0%, Baru, Nego, dll)
- * 3. Tampilan Harga & Estimasi Cicilan
- * 4. Spesifikasi (Kamar Tidur, Kamar Mandi, Luas Tanah)
- * 5. Tombol Aksi (Lihat Detail & Chat WhatsApp Langsung)
- *
- * Anda dapat mengedit tampilan visual kartu properti di sini secara terpisah!
- */
 export const ListingCard: React.FC<ListingCardProps> = ({
   property,
   itemNumber,
   onSelectProperty
 }) => {
+  const { consultant } = usePropertyContext();
   const [imgError, setImgError] = useState(false);
 
   // Link WhatsApp otomatis dengan isi pesan detail properti
   const waUnitLink = createWhatsAppLink(
-    CONSULTANT_INFO.whatsappNumber,
-    `Halo Bu ${CONSULTANT_INFO.name}, saya tertarik dengan "${property.title}" (${property.priceFormatted}) di ${property.location}. Apakah unit ini masih tersedia?`
+    consultant.whatsappNumber || consultant.whatsapp || '6285782909742',
+    property.isSold 
+      ? `Halo Bu ${consultant.name}, saya melihat unit "${property.title}" di ${property.location} sudah berstatus terjual. Apakah ada unit serupa lainnya yang masih tersedia?`
+      : `Halo Bu ${consultant.name}, saya tertarik dengan "${property.title}" (${property.priceFormatted}) di ${property.location}. Apakah unit ini masih tersedia?`
   );
 
   return (
-    <div className="bg-white rounded-xl sm:rounded-2xl lg:rounded-3xl border border-[#D8E4E1] shadow-2xs hover:shadow-xl hover:border-bm-slate transition-all duration-300 flex flex-col overflow-hidden group">
+    <div className={`rounded-xl sm:rounded-2xl lg:rounded-3xl border shadow-2xs hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group ${
+      property.isSold 
+        ? 'bg-slate-50/80 border-rose-200' 
+        : 'bg-white border-[#D8E4E1] hover:border-bm-slate'
+    }`}>
       
       {/* ========================================================= */}
       {/* 1. BAGIAN FOTO PROPERTI (IMAGE & OVERLAY)                 */}
@@ -58,7 +52,9 @@ export const ListingCard: React.FC<ListingCardProps> = ({
           <img
             src={property.imageUrl}
             alt={property.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ${
+              property.isSold ? 'grayscale-40 opacity-85' : ''
+            }`}
             loading="lazy"
             onError={() => setImgError(true)}
           />
@@ -75,14 +71,23 @@ export const ListingCard: React.FC<ListingCardProps> = ({
         {/* --- Top Badges & Penomoran Unit --- */}
         <div className="absolute top-2 sm:top-3 left-2 sm:left-3 right-2 sm:right-3 flex items-center justify-between gap-1">
           <div className="flex items-center gap-1 overflow-hidden">
-            {property.badge && (
+            {property.isSold ? (
+              <span className="px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded-md sm:rounded-lg bg-rose-600 text-white font-extrabold text-[9px] sm:text-[11px] tracking-tight shadow-md">
+                SUDAH TERJUAL (SOLD)
+              </span>
+            ) : property.badge ? (
               <span className="px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded-md sm:rounded-lg bg-bm-teal text-white font-bold text-[9px] sm:text-[11px] tracking-tight sm:tracking-wide shadow-xs truncate max-w-[110px] sm:max-w-none">
                 {property.badge}
               </span>
-            )}
+            ) : null}
             <span className="px-1.5 sm:px-2 py-0.5 rounded-md sm:rounded-lg bg-slate-900/70 backdrop-blur-xs text-white text-[8px] sm:text-[10px] font-medium hidden sm:inline-block">
               {property.categoryLabel.split(' ')[0]}
             </span>
+            {property.district && (
+              <span className="px-1.5 sm:px-2 py-0.5 rounded-md bg-white/90 text-[#16282E] text-[8px] sm:text-[10px] font-bold shadow-xs">
+                {property.district}
+              </span>
+            )}
           </div>
           {typeof itemNumber === 'number' && (
             <span className="px-1.5 sm:px-2 py-0.5 rounded-md bg-slate-900/60 backdrop-blur-xs text-white/95 text-[9px] sm:text-[10px] font-semibold shrink-0">
