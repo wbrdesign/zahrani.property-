@@ -9,6 +9,7 @@ import {
   Building, 
   CalendarCheck2 
 } from 'lucide-react';
+import { usePropertyContext } from '../context/PropertyContext';
 import { CONSULTANT_INFO } from '../data/mockData';
 import { createWhatsAppLink } from '../utils/formatters';
 
@@ -23,10 +24,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
   onOpenSellModal,
   avatarUrl
 }) => {
-  const currentAvatar = avatarUrl || CONSULTANT_INFO.avatar;
+  const { consultant } = usePropertyContext();
+  const currentAvatar = avatarUrl || consultant.avatar || consultant.avatarUrl || CONSULTANT_INFO.avatar;
   const directWa = createWhatsAppLink(
-    CONSULTANT_INFO.whatsappNumber,
-    `Halo Bu ${CONSULTANT_INFO.name}, saya ingin menjadwalkan konsultasi properti privat.`
+    consultant.whatsappNumber || consultant.whatsapp || '6285782909742',
+    `Halo Bu ${consultant.name}, saya ingin menjadwalkan konsultasi properti privat di Malang.`
   );
 
   return (
@@ -48,7 +50,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             <div className="relative">
               <img
                 src={currentAvatar}
-                alt={CONSULTANT_INFO.name}
+                alt={consultant.name}
                 className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover object-top ring-4 ring-bm-teal/70 shadow-md"
               />
               <div className="absolute -bottom-1 -right-1 bg-bm-teal text-white p-1 rounded-full ring-2 ring-white shadow-xs">
@@ -58,19 +60,19 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
 
             <div>
               <h3 className="font-extrabold text-base sm:text-lg text-[#16282E] leading-tight">
-                {CONSULTANT_INFO.name}
+                {consultant.name}
               </h3>
               <p className="text-xs sm:text-sm text-bm-teal font-bold">
-                {CONSULTANT_INFO.brandName} • {CONSULTANT_INFO.title}
+                {consultant.brandName || consultant.agency} • {consultant.title}
               </p>
               <div className="inline-flex items-center justify-center gap-1.5 text-xs text-[#50666E] mt-1">
                 <Clock className="w-3.5 h-3.5 text-bm-slate" />
-                <span>{CONSULTANT_INFO.hours}</span>
+                <span>{consultant.hours}</span>
               </div>
             </div>
 
             <p className="text-xs sm:text-sm text-[#3E5259] leading-relaxed bg-[#F3EFE6] p-4 rounded-2xl border border-[#E7DECC] italic w-full">
-              "Kepuasan dan keamanan legalitas properti Anda adalah prioritas nomor satu saya. Silakan hubungi saya kapan pun untuk konsultasi gratis."
+              "{consultant.bio}"
             </p>
 
             {/* Direct survey or sell triggers */}
@@ -110,7 +112,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 </div>
                 <div>
                   <div className="font-bold text-xs sm:text-sm text-[#16282E]">WhatsApp Messenger Resmi</div>
-                  <div className="text-[11px] sm:text-xs text-bm-teal font-medium">Konsultasi cepat 1-on-1 langsung ke Bu Zahrani</div>
+                  <div className="text-[11px] sm:text-xs text-bm-teal font-medium">Konsultasi cepat 1-on-1 langsung ke Bu {consultant.name.split(',')[0]}</div>
                 </div>
               </div>
               <span className="text-xs font-bold bg-bm-teal text-white px-3.5 py-1.5 rounded-xl shadow-xs group-hover:scale-105 transition-transform">
@@ -119,7 +121,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
             </a>
 
             <a
-              href={`tel:${CONSULTANT_INFO.phone}`}
+              href={`tel:${consultant.phone}`}
               className="flex items-center justify-between p-4 rounded-2xl bg-[#F8FAF9] text-[#16282E] border border-[#D8E4E1] hover:bg-[#EEF4F2] transition-colors group"
             >
               <div className="flex items-center gap-3.5">
@@ -128,7 +130,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 </div>
                 <div>
                   <div className="font-bold text-xs sm:text-sm text-[#16282E]">Telepon Seluler / Langsung</div>
-                  <div className="text-[11px] sm:text-xs text-[#50666E]">{CONSULTANT_INFO.phone}</div>
+                  <div className="text-[11px] sm:text-xs text-[#50666E]">{consultant.phone}</div>
                 </div>
               </div>
               <span className="text-xs font-bold bg-bm-teal-dark text-white px-3.5 py-1.5 rounded-xl shadow-xs group-hover:scale-105 transition-transform">
@@ -141,9 +143,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                 <MapPin className="w-5 h-5 text-bm-teal" />
               </div>
               <div>
-                <div className="font-bold text-xs sm:text-sm text-[#16282E]">Area Wilayah Layanan</div>
+                <div className="font-bold text-xs sm:text-sm text-[#16282E]">Wilayah Operasional & Kantor</div>
                 <div className="text-[11px] sm:text-xs text-[#50666E] mt-0.5 leading-relaxed">
-                  Melayani Transaksi Properti Seluruh Indonesia — Spesialis & Fokus Utama Area Malang Raya & Kota Batu.
+                  <strong className="text-[#16282E] font-semibold">{consultant.location}</strong>
+                  <br />
+                  {consultant.serviceArea || 'Meliputi Kota Malang (Klojen, Lowokwaru, Blimbing, Sukun, Kedungkandang), Kota Batu, dan Malang Raya sekitarnya.'}
                 </div>
               </div>
             </div>
