@@ -1,5 +1,6 @@
 import React from 'react';
-import { Phone, MessageCircle, ShieldCheck, Home, Building, Calculator, UserCheck, Calendar } from 'lucide-react';
+import { Phone, MessageCircle, ShieldCheck, Home, Building, Calculator, UserCheck, Calendar, Lock, Settings } from 'lucide-react';
+import { usePropertyContext } from '../context/PropertyContext';
 import { CONSULTANT_INFO } from '../data/mockData';
 import { createWhatsAppLink } from '../utils/formatters';
 import { ActiveTab } from '../types';
@@ -15,9 +16,11 @@ export const Header: React.FC<HeaderProps> = ({
   onTabChange,
   onOpenSurveyModal
 }) => {
+  const { consultant, isAdminLoggedIn } = usePropertyContext();
+  
   const quickWaUrl = createWhatsAppLink(
-    CONSULTANT_INFO.whatsappNumber,
-    `Halo Bu ${CONSULTANT_INFO.name}, saya ingin konsultasi seputar properti dari website Zahrani Property.`
+    consultant.whatsappNumber || consultant.whatsapp || CONSULTANT_INFO.whatsappNumber,
+    `Halo Bu ${consultant.name || CONSULTANT_INFO.name}, saya ingin konsultasi seputar properti dari website Zahrani Property Malang.`
   );
 
   const navItems: { id: ActiveTab; label: string }[] = [
@@ -47,7 +50,7 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
             <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-[#50666E]">
               <span className="w-2 h-2 rounded-full bg-bm-sage animate-pulse"></span>
-              <span className="font-medium">Konsultan Properti • Siap Melayani</span>
+              <span className="font-medium">Kota Malang • Siap Melayani</span>
             </div>
           </div>
         </div>
@@ -71,10 +74,46 @@ export const Header: React.FC<HeaderProps> = ({
               </button>
             );
           })}
+
+          {/* Dedicated Admin Backend Nav Tab */}
+          <button
+            type="button"
+            onClick={() => onTabChange('admin')}
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ml-1 border ${
+              activeTab === 'admin'
+                ? 'bg-[#16282E] text-white border-[#16282E] shadow-xs'
+                : isAdminLoggedIn
+                  ? 'bg-emerald-50 text-emerald-700 border-emerald-300 hover:bg-emerald-100'
+                  : 'bg-[#EEF4F2]/70 text-[#2B454E] border-[#D8E4E1] hover:bg-[#EEF4F2]'
+            }`}
+            title="Backend Admin Pengelola Website"
+          >
+            <Lock className="w-3.5 h-3.5" />
+            <span>Admin</span>
+            {isAdminLoggedIn && (
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+            )}
+          </button>
         </nav>
 
         {/* Right Action CTAs (PC & Mobile) */}
         <div className="flex items-center gap-2 sm:gap-3">
+          {/* Quick Admin Button for Mobile */}
+          <button
+            type="button"
+            onClick={() => onTabChange('admin')}
+            className={`md:hidden p-2 rounded-xl border text-xs font-bold transition-all flex items-center justify-center ${
+              activeTab === 'admin'
+                ? 'bg-[#16282E] text-white border-[#16282E]'
+                : isAdminLoggedIn
+                  ? 'bg-emerald-50 text-emerald-700 border-emerald-300'
+                  : 'bg-[#EEF4F2] text-[#2B454E] border-[#D8E4E1]'
+            }`}
+            title="Akses Admin"
+          >
+            <Lock className="w-4 h-4" />
+          </button>
+
           {/* Survey booking button on desktop */}
           <button
             type="button"
@@ -87,12 +126,12 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Direct Phone button on tablet & desktop */}
           <a
-            href={`tel:${CONSULTANT_INFO.phone}`}
+            href={`tel:${consultant.phone || CONSULTANT_INFO.phone}`}
             className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-[#D8E4E1] hover:border-bm-slate text-[#2B454E] font-semibold text-xs transition-colors"
             title="Telepon Zahrani"
           >
             <Phone className="w-3.5 h-3.5 text-bm-slate" />
-            <span className="hidden xl:inline">{CONSULTANT_INFO.phone}</span>
+            <span className="hidden xl:inline">{consultant.phone || CONSULTANT_INFO.phone}</span>
             <span className="xl:hidden">Telepon</span>
           </a>
 
