@@ -129,7 +129,7 @@ Mohon informasi langkah dan kerja sama pemasarannya. Terima kasih!`;
             <input
               type="text"
               required
-              placeholder="Contoh: Cluster Lavender, BSD City"
+              placeholder="Contoh: Perumahan Araya, Kota Malang"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               className="w-full p-2.5 bg-[#F8FAF9] border border-[#D8E4E1] rounded-xl font-medium focus:outline-none focus:ring-2 focus:ring-bm-teal text-[#16282E]"
