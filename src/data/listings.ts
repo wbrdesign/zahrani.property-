@@ -2,79 +2,44 @@ import { Property } from '../types';
 
 /**
  * =======================================================================
- * DATA KATALOG LISTING PROPERTI & FOTO (KHUSUS LISTING)
+ * DATA KATALOG LISTING PROPERTI & FOTO - KOTA MALANG, JAWA TIMUR 65146
  * =======================================================================
- * File ini KHUSUS untuk mengelola semua listing properti beserta fotonya.
- * Anda dapat dengan mudah mengedit atau menambahkan properti baru di sini 
- * tanpa takut merusak bagian kode lainnya!
- *
- * --- CARA MENGGANTI ATAU MENAMBAHKAN FOTO PROPERTI ---
- * 1. OPSI A (Rekomendasi di GitHub):
- *    - Upload foto properti Anda ke folder: public/properties/
- *      (Contoh nama: rumah-bsd-1.jpg, tampak-depan.jpg)
- *    - Masukkan path fotonya di properti ini:
- *      imageUrl: '/properties/rumah-bsd-1.jpg',
- *      galleryImages: [
- *        '/properties/rumah-bsd-1.jpg',
- *        '/properties/rumah-bsd-interior.jpg'
- *      ]
- *
- * 2. OPSI B (Menggunakan Link URL Online):
- *    - Masukkan link gambar langsung (misal dari Cloudinary, Imgur, Google Photos, Unsplash):
- *      imageUrl: 'https://images.unsplash.com/photo-xxx...'
- *
- * --- TEMPLATE MENAMBAH UNIT BARU (Tinggal Copy-Paste di bawah) ---
- * {
- *   id: 'prop-unik-baru',
- *   title: 'Nama Properti / Cluster',
- *   category: 'rumah-baru', // Pilihan: 'rumah-baru' | 'rumah-second' | 'komersial' | 'tanah'
- *   categoryLabel: 'Rumah Baru Siap Huni',
- *   location: 'Area, Kota',
- *   city: 'Tangerang Selatan',
- *   price: 1500000000,
- *   priceFormatted: 'Rp 1,5 Miliar',
- *   installmentEstimate: 'Rp 8,5 Jt/bln',
- *   specs: {
- *     bedrooms: 3,
- *     bathrooms: 2,
- *     landArea: 90,
- *     buildingArea: 75,
- *     carport: 2,
- *     certificate: 'SHM + IMB Siap'
- *   },
- *   features: ['Free Biaya KPR', 'Dekat Stasiun', 'One Gate System'],
- *   imageUrl: '/properties/nama-foto.jpg',
- *   galleryImages: [
- *     '/properties/nama-foto.jpg',
- *     '/properties/nama-foto-2.jpg'
- *   ],
- *   isHot: true,
- *   badge: 'PROMO BULAN INI',
- *   description: 'Deskripsi lengkap properti Anda...'
- * },
+ * Data terintegrasi dengan Admin Backend (Password: Bismillah99).
+ * Admin dapat menambah, mengedit, mengubah status Terjual/Belum Terjual,
+ * serta memfilter berdasarkan wilayah Malang.
  */
 
-export const PROPERTIES: Property[] = [
-  // Page 1 (1 - 9)
+export const MALANG_DISTRICTS = [
+  'Lowokwaru',
+  'Klojen',
+  'Blimbing',
+  'Sukun',
+  'Kedungkandang',
+  'Batu / Malang Raya'
+] as const;
+
+export const INITIAL_PROPERTIES: Property[] = [
+  // 1. Blimbing - Araya
   {
-    id: 'prop-1',
-    title: 'Cluster Grand Emerald BSD',
+    id: 'prop-mlg-1',
+    title: 'Cluster Mewah Golf View Kota Araya',
     category: 'rumah-baru',
-    categoryLabel: 'Rumah Baru (Indent / Ready)',
-    location: 'BSD City, Tangerang Selatan',
-    city: 'Tangerang Selatan',
-    price: 1350000000,
-    priceFormatted: 'Rp 1,35 Miliar',
-    installmentEstimate: 'Rp 7,8 Jt/bln',
+    categoryLabel: 'Rumah Baru Eksklusif',
+    location: 'Perumahan Kota Araya, Blimbing',
+    city: 'Kota Malang',
+    district: 'Blimbing',
+    price: 1850000000,
+    priceFormatted: 'Rp 1,85 Miliar',
+    installmentEstimate: 'Rp 10,2 Jt/bln',
     specs: {
-      bedrooms: 3,
-      bathrooms: 2,
-      landArea: 72,
-      buildingArea: 68,
+      bedrooms: 4,
+      bathrooms: 3,
+      landArea: 120,
+      buildingArea: 135,
       carport: 2,
-      certificate: 'SHM + IMB Siap'
+      certificate: 'SHM + PBG Siap'
     },
-    features: ['Free BPHTB & Biaya KPR', 'Smart Home System', 'Clubhouse & Kolam Renang', '5 Menit ke Gerbang Tol'],
+    features: ['Akses Golf & Club House', 'Row Jalan 10 Meter', 'Keamanan 24 Jam One Gate', 'Dekat RS Persada & Plaza Araya'],
     imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
     galleryImages: [
       'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
@@ -82,475 +47,369 @@ export const PROPERTIES: Property[] = [
       'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80'
     ],
     isHot: true,
-    badge: 'PROMO DP 0%',
-    description: 'Rumah modern 2 lantai di kawasan mandiri prestisius BSD. Lingkungan asri, bebas banjir, keamanan 24 jam dengan fasilitas one gate system.'
+    isSold: false,
+    badge: 'PROMO BULAN INI',
+    description: 'Hunian mewah 2 lantai berkonsep resort di kawasan mandiri paling prestisius di Kota Malang (Kota Araya). Udara sejuk, lingkungan rindang, dan nilai investasi tinggi.',
+    createdAt: '2026-03-01'
   },
+
+  // 2. Lowokwaru - Soekarno Hatta
   {
-    id: 'prop-2',
-    title: 'Modern Minimalist Villa Cibubur',
+    id: 'prop-mlg-2',
+    title: 'Rumah Modern Minimalis Area Kampus Suhat',
     category: 'rumah-second',
     categoryLabel: 'Rumah Siap Huni',
-    location: 'Kota Wisata, Cibubur',
-    city: 'Jakarta Timur / Cibubur',
-    price: 980000000,
-    priceFormatted: 'Rp 980 Juta',
-    installmentEstimate: 'Rp 5,6 Jt/bln',
+    location: 'Jl. Soekarno Hatta, Lowokwaru',
+    city: 'Kota Malang',
+    district: 'Lowokwaru',
+    price: 975000000,
+    priceFormatted: 'Rp 975 Juta',
+    installmentEstimate: 'Rp 5,5 Jt/bln',
     specs: {
       bedrooms: 3,
       bathrooms: 2,
-      landArea: 90,
+      landArea: 96,
       buildingArea: 80,
       carport: 1,
       certificate: 'SHM On Hand'
     },
-    features: ['Furnished Cantik', 'Siap Huni Langsung', 'Dekat Stasiun LRT', 'Row Jalan 8 Meter'],
+    features: ['5 Menit ke Univ Brawijaya & Polinema', 'Full Furnished Rapi', 'Sirkulasi Udara Adem', 'Potensi Kost Mahasiswa'],
     imageUrl: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80',
     galleryImages: [
       'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80'
+      'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80'
     ],
-    isHot: false,
-    badge: 'BISA NEGO SAMPAI JADI',
-    description: 'Hunian nyaman semi furnished dengan sirkulasi udara optimal dan pencahayaan alami melimpah. Pemilik pindah tugas ke luar kota, BU (Butuh Uang).'
+    isHot: true,
+    isSold: false,
+    badge: 'SIAP HUNI KOTA MALANG',
+    description: 'Rumah siap huni di pusat lifestyle dan kuliner Soekarno Hatta (Suhat) Lowokwaru Malang. Sangat prospektif untuk tempat tinggal keluarga atau disewakan ke mahasiswa UB/Polinema.',
+    createdAt: '2026-03-02'
   },
+
+  // 3. Lowokwaru - Komersial Ruko Suhat
   {
-    id: 'prop-3',
-    title: 'Ruko Komersial 3 Lantai Strategis',
+    id: 'prop-mlg-3',
+    title: 'Ruko Bisnis 3 Lantai Utama Soekarno-Hatta',
     category: 'komersial',
-    categoryLabel: 'Komersial / Ruko Bisnis',
-    location: 'Bintaro Jaya Sektor 7',
-    city: 'Tangerang Selatan',
-    price: 2450000000,
-    priceFormatted: 'Rp 2,45 Miliar',
-    installmentEstimate: 'Rp 14,2 Jt/bln',
+    categoryLabel: 'Komersial / Ruko Usaha',
+    location: 'Boulevard Soekarno Hatta, Lowokwaru',
+    city: 'Kota Malang',
+    district: 'Lowokwaru',
+    price: 2650000000,
+    priceFormatted: 'Rp 2,65 Miliar',
+    installmentEstimate: 'Rp 14,8 Jt/bln',
     specs: {
       bedrooms: 1,
       bathrooms: 3,
-      landArea: 85,
-      buildingArea: 180,
-      carport: 3,
-      certificate: 'HGB Murni'
+      landArea: 90,
+      buildingArea: 220,
+      carport: 4,
+      certificate: 'SHM Murni'
     },
-    features: ['Parkiran Luas Depan', 'Lalu Lintas Ramai 24 Jam', 'Cocok Kafe / Klinik / Kantor', 'Listrik 4400 Watt'],
+    features: ['Parkiran Luas Depan Ruko', 'Kawasan Pusat Bisnis & Kafe', 'Listrik 5500 Watt + Tandon', 'Yield Sewa s/d 130 Jt/thn'],
     imageUrl: 'https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=800&q=80',
     galleryImages: [
       'https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&w=800&q=80'
     ],
     isHot: true,
-    badge: 'YIELD SEWA TINGGI',
-    description: 'Unit ruko 3 lantai di pusat bisnis ramai Bintaro. Potensi sewa Rp 120-150 Jt per tahun, posisi persis di pinggir jalan boulevard utama.'
+    isSold: false,
+    badge: 'LOKASI EMAS KAFE & KANTOR',
+    description: 'Unit ruko 3 lantai di jalur terpadat Kota Malang. Sangat cocok untuk kantor cabang, klinik kecantikan, restoran franchise, maupun co-working space.',
+    createdAt: '2026-03-03'
   },
+
+  // 4. Klojen - Ijen Boulevard Heritage
   {
-    id: 'prop-4',
-    title: 'Rumah Mezzanine Japandi Bintaro',
-    category: 'rumah-baru',
-    categoryLabel: 'Rumah Desain Kekinian',
-    location: 'Pondok Aren, Bintaro',
-    city: 'Tangerang Selatan',
-    price: 795000000,
-    priceFormatted: 'Rp 795 Juta',
-    installmentEstimate: 'Rp 4,5 Jt/bln',
+    id: 'prop-mlg-4',
+    title: 'Rumah Kolonial Indische Dekat Ijen Boulevard',
+    category: 'rumah-second',
+    categoryLabel: 'Hunian Premium Pusat Kota',
+    location: 'Kawasan Oro-Oro Dowo, Klojen',
+    city: 'Kota Malang',
+    district: 'Klojen',
+    price: 3800000000,
+    priceFormatted: 'Rp 3,80 Miliar',
+    installmentEstimate: 'Rp 21,5 Jt/bln',
     specs: {
-      bedrooms: 2,
-      bathrooms: 1,
-      landArea: 60,
-      buildingArea: 52,
-      carport: 1,
-      certificate: 'SHM Siap Balik Nama'
+      bedrooms: 5,
+      bathrooms: 4,
+      landArea: 280,
+      buildingArea: 240,
+      carport: 3,
+      certificate: 'SHM + PBB Lengkap'
     },
-    features: ['Desain Mezzanine Estetik', 'Bisa KPR Bank Syariah', 'Dekat Toll Pondok Ranji', 'Bebas Biaya Notaris'],
-    imageUrl: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
+    features: ['Halaman Asri & Rindang', 'Hanya 2 Menit ke Ijen Boulevard', 'Plafon Tinggi 4 Meter', 'Kawasan Elit Pusat Malang'],
+    imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
     galleryImages: [
-      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
       'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80'
     ],
     isHot: false,
-    badge: 'CICILAN 4 JUTAAN',
-    description: 'Rumah modern Scandinavian Japandi dengan langit-langit tinggi (high ceiling) 4.5m sehingga ruangan tetap sejuk dan lapang.'
+    isSold: false,
+    badge: 'ASET PRESTISIUS',
+    description: 'Properti langka di lingkar pusat pemerintahan dan heritage Kota Malang. Lokasi tenang, prestisius, dan bernilai warisan tinggi.',
+    createdAt: '2026-03-04'
   },
+
+  // 5. Sukun - Dieng Permai (TERJUAL / SOLD SAMPLE)
   {
-    id: 'prop-5',
-    title: 'Kavling Tanah Siap Bangun Jagakarsa',
-    category: 'tanah',
-    categoryLabel: 'Tanah Kavling',
-    location: 'Jagakarsa, Jakarta Selatan',
-    city: 'Jakarta Selatan',
-    price: 650000000,
-    priceFormatted: 'Rp 650 Juta',
-    installmentEstimate: 'Cash / Bertahap',
-    specs: {
-      bedrooms: 0,
-      bathrooms: 0,
-      landArea: 105,
-      buildingArea: 0,
-      carport: 0,
-      certificate: 'SHM Pecah Unit'
-    },
-    features: ['Bentuk Kotak Simetris', 'Akses Masuk Mobil 2 Arah', 'Zonasi R1 Pemukiman', 'Jauh Dari SUTET / Makam'],
-    imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80',
-    galleryImages: [
-      'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80'
-    ],
-    isHot: false,
-    badge: 'LANGKA DI JAKSEL',
-    description: 'Tanah kavling padat siap bangun dalam mini townhouse. Suasana asri dan tenang di Jakarta Selatan dengan kenaikan nilai investasi cepat.'
-  },
-  {
-    id: 'prop-6',
-    title: 'Scandinavian Modern Townhouse Serpong',
+    id: 'prop-mlg-5',
+    title: 'Scandinavian Compact House Lembah Dieng',
     category: 'rumah-baru',
-    categoryLabel: 'Rumah Baru 2 Lantai',
-    location: 'Serpong Jaya, Tangerang Selatan',
-    city: 'Tangerang Selatan',
-    price: 1150000000,
-    priceFormatted: 'Rp 1,15 Miliar',
-    installmentEstimate: 'Rp 6,7 Jt/bln',
-    specs: {
-      bedrooms: 3,
-      bathrooms: 2,
-      landArea: 70,
-      buildingArea: 65,
-      carport: 2,
-      certificate: 'SHM + PBG'
-    },
-    features: ['Free AC Tiap Kamar', 'Underground Utility Cable', 'Bebas Banjir 100%', 'One Gate Security 24 Jam'],
-    imageUrl: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80',
-    galleryImages: [
-      'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80'
-    ],
-    isHot: true,
-    badge: 'FREE BIAYA KPR',
-    description: 'Townhouse eksklusif bertema Scandinavian modern di kawasan berkembang Serpong, dekat stasiun KRL Rawa Buntu dan pintu tol BSD.'
-  },
-  {
-    id: 'prop-7',
-    title: 'Rumah Kolonial Cantik Cilandak',
-    category: 'rumah-second',
-    categoryLabel: 'Rumah Siap Huni Jaksel',
-    location: 'Cilandak Barat, Jakarta Selatan',
-    city: 'Jakarta Selatan',
-    price: 3200000000,
-    priceFormatted: 'Rp 3,2 Miliar',
-    installmentEstimate: 'Rp 18,5 Jt/bln',
-    specs: {
-      bedrooms: 4,
-      bathrooms: 3,
-      landArea: 160,
-      buildingArea: 140,
-      carport: 2,
-      certificate: 'SHM Bersih'
-    },
-    features: ['Taman Depan & Belakang', 'Halaman Luas', '5 Menit ke Citos & MRT Fatmawati', 'Akses Jalan Lebar'],
-    imageUrl: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80',
-    galleryImages: [
-      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80'
-    ],
-    isHot: false,
-    badge: 'LOKASI EMAS JAKSEL',
-    description: 'Hunian asri bergaya modern kolonial di kawasan prestisius Cilandak. Dekat pusat perbelanjaan, sekolah internasional, dan stasiun MRT.'
-  },
-  {
-    id: 'prop-8',
-    title: 'Shophouse Boulevard Gading Serpong',
-    category: 'komersial',
-    categoryLabel: 'Ruko Usaha Boulevard',
-    location: 'Gading Serpong, Tangerang',
-    city: 'Tangerang',
-    price: 3100000000,
-    priceFormatted: 'Rp 3,1 Miliar',
-    installmentEstimate: 'Rp 17,9 Jt/bln',
-    specs: {
-      bedrooms: 1,
-      bathrooms: 3,
-      landArea: 90,
-      buildingArea: 210,
-      carport: 4,
-      certificate: 'HGB Murni'
-    },
-    features: ['Frontage Lebar 5 Meter', 'Area Parkir On-Street Luas', 'Dikelilingi 5 Cluster Padat', 'Sangat Prospektif'],
-    imageUrl: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80',
-    galleryImages: [
-      'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80'
-    ],
-    isHot: true,
-    badge: 'TRAFFIC RAMAI',
-    description: 'Shophouse 3 lantai di boulevard utama Gading Serpong. Sangat cocok untuk restoran, showroom, apotek, maupun kantor cabang.'
-  },
-  {
-    id: 'prop-9',
-    title: 'Cluster Asri Forest View Pamulang',
-    category: 'rumah-baru',
-    categoryLabel: 'Rumah Murah Subsidi & Komersil',
-    location: 'Pamulang, Tangerang Selatan',
-    city: 'Tangerang Selatan',
+    categoryLabel: 'Rumah Konsep Scandinavian',
+    location: 'Kawasan Lembah Dieng, Sukun',
+    city: 'Kota Malang',
+    district: 'Sukun',
     price: 685000000,
     priceFormatted: 'Rp 685 Juta',
     installmentEstimate: 'Rp 3,9 Jt/bln',
     specs: {
       bedrooms: 2,
       bathrooms: 1,
-      landArea: 60,
-      buildingArea: 45,
+      landArea: 65,
+      buildingArea: 50,
       carport: 1,
-      certificate: 'SHM Pecah'
+      certificate: 'SHM Siap Balik Nama'
     },
-    features: ['Cicilan Sangat Terjangkau', 'DP Cuma 10 Juta', 'Dekat RSUD Pamulang', 'Fasilitas Playground Anak'],
-    imageUrl: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=800&q=80',
+    features: ['Dekat Universitas Merdeka (UNMER)', 'Free Canopy & Smartlock', 'Bebas Banjir & Tenang', 'Cicilan Terjangkau'],
+    imageUrl: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80',
     galleryImages: [
-      'https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=800&q=80'
+      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80'
     ],
     isHot: false,
-    badge: 'BEST SELLER',
-    description: 'Pilihan tepat untuk generasi muda dan keluarga baru yang ingin memiliki hunian pertama dengan cicilan di bawah 4 jutaan.'
+    isSold: true, // Sample sold property!
+    badge: 'SUDAH TERJUAL (SOLD)',
+    description: 'Unit rumah compact modern telah berhasil terjual dalam kurun waktu 2 minggu pendampingan Zahrani Property kepada pembeli dokter muda.',
+    createdAt: '2026-02-15'
   },
 
-  // Page 2 (10 - 18)
+  // 6. Kedungkandang - Sawojajar 2
   {
-    id: 'prop-10',
-    title: 'Rumah Mewah Modern Classic BSD',
+    id: 'prop-mlg-6',
+    title: 'Cluster Minimalis Asri Sawojajar Malang',
     category: 'rumah-baru',
-    categoryLabel: 'Rumah Mewah Eksklusif',
-    location: 'The Mozia BSD City',
-    city: 'Tangerang Selatan',
-    price: 4500000000,
-    priceFormatted: 'Rp 4,5 Miliar',
-    installmentEstimate: 'Rp 26,0 Jt/bln',
+    categoryLabel: 'Cluster Baru Sawojajar',
+    location: 'Sawojajar, Kedungkandang',
+    city: 'Kota Malang',
+    district: 'Kedungkandang',
+    price: 590000000,
+    priceFormatted: 'Rp 590 Juta',
+    installmentEstimate: 'Rp 3,4 Jt/bln',
     specs: {
-      bedrooms: 4,
-      bathrooms: 4,
-      landArea: 180,
-      buildingArea: 220,
-      carport: 2,
-      certificate: 'PPJB Siap AJB'
+      bedrooms: 2,
+      bathrooms: 1,
+      landArea: 72,
+      buildingArea: 48,
+      carport: 1,
+      certificate: 'SHM + IMB'
     },
-    features: ['Private Swimming Pool Option', 'Full Marmer Import', 'Smart Digital Lock Door', 'Dekat QBig & ICE BSD'],
-    imageUrl: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80',
+    features: ['Akses Dekat Pintu Tol Madyopuro Malang', 'Kawasan Padat Fasilitas', 'Air PDAM Lancar & Jernih', 'Bisa KPR Bank BSI / BCA'],
+    imageUrl: 'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80',
     galleryImages: [
-      'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80',
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80'
+      'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=800&q=80'
     ],
     isHot: true,
-    badge: 'PREMIUM LUXURY',
-    description: 'Hunian mewah 3 lantai dengan tata ruang luas, material premium marmer Italia, dan pemandangan danau buatan yang tenang di BSD.'
+    isSold: false,
+    badge: 'AKSES CEPAT TOL MALANG',
+    description: 'Rumah idaman di Sawojajar Kedungkandang dengan akses hanya 5 menit menuju Pintu Tol Malang-Pandaan (Madyopuro). Sangat cocok untuk mobilitas ke Surabaya.',
+    createdAt: '2026-03-05'
   },
+
+  // 7. Lowokwaru - Tunggulwulung
   {
-    id: 'prop-11',
-    title: 'Compact Smart Home Kebayoran Lama',
-    category: 'rumah-second',
-    categoryLabel: 'Rumah Siap Huni Jaksel',
-    location: 'Kebayoran Lama, Jakarta Selatan',
-    city: 'Jakarta Selatan',
-    price: 1650000000,
-    priceFormatted: 'Rp 1,65 Miliar',
-    installmentEstimate: 'Rp 9,5 Jt/bln',
+    id: 'prop-mlg-7',
+    title: 'Rumah 2 Lantai Mewah Tunggulwulung Malang',
+    category: 'rumah-baru',
+    categoryLabel: 'Rumah 2 Lantai Kekinian',
+    location: 'Tunggulwulung, Lowokwaru',
+    city: 'Kota Malang',
+    district: 'Lowokwaru',
+    price: 1150000000,
+    priceFormatted: 'Rp 1,15 Miliar',
+    installmentEstimate: 'Rp 6,6 Jt/bln',
     specs: {
       bedrooms: 3,
       bathrooms: 2,
-      landArea: 78,
-      buildingArea: 95,
-      carport: 1,
-      certificate: 'SHM Hak Milik'
+      landArea: 84,
+      buildingArea: 90,
+      carport: 2,
+      certificate: 'SHM Pecah'
     },
-    features: ['10 Menit ke Gandaria City', 'Renovasi Total 2024', 'Kitchen Set Mewah', 'Row Jalan 2 Mobil'],
-    imageUrl: 'https://images.unsplash.com/photo-1598228723793-52759bba239c?auto=format&fit=crop&w=800&q=80',
+    features: ['Balkon Luas View Gunung Panderman', 'One Gate System & CCTV', 'Dekat Kampus UMM & UB', 'Desain Modern Industrial'],
+    imageUrl: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=80',
     galleryImages: [
-      'https://images.unsplash.com/photo-1598228723793-52759bba239c?auto=format&fit=crop&w=800&q=80'
+      'https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=80'
     ],
-    isHot: false,
-    badge: 'LOKASI STRATEGIS',
-    description: 'Rumah cantik 2 lantai di Kebayoran Lama yang sudah direnovasi total dengan sentuhan modern minimalis, siap huni tanpa perlu perbaikan.'
+    isHot: true,
+    isSold: false,
+    badge: 'BEST SELLER LOWOKWARU',
+    description: 'Hunian asri bernuansa sejuk dengan view pegunungan di kawasan favorit Tunggulwulung Lowokwaru. Sangat diminati kalangan profesional muda dan dosen.',
+    createdAt: '2026-03-06'
   },
+
+  // 8. Batu / Malang Raya - Villa Wisata
   {
-    id: 'prop-12',
-    title: 'Tanah Komersial Boulevard BSD',
+    id: 'prop-mlg-8',
+    title: 'Villa Modern Estetik Panorama Kota Batu',
+    category: 'rumah-second',
+    categoryLabel: 'Villa Wisata & Liburan',
+    location: 'Oro-Oro Ombo, Kota Batu',
+    city: 'Kota Batu / Malang Raya',
+    district: 'Batu / Malang Raya',
+    price: 1450000000,
+    priceFormatted: 'Rp 1,45 Miliar',
+    installmentEstimate: 'Rp 8,2 Jt/bln',
+    specs: {
+      bedrooms: 3,
+      bathrooms: 2,
+      landArea: 105,
+      buildingArea: 95,
+      carport: 2,
+      certificate: 'SHM + IMB Wisata'
+    },
+    features: ['Dekat Jatim Park 2 & BNS', 'Private Rooftop BBQ View Gunung', 'Okupansi Homestay 70%', 'Full Furnished Siap Sewa'],
+    imageUrl: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?auto=format&fit=crop&w=800&q=80'
+    ],
+    isHot: true,
+    isSold: false,
+    badge: 'POTENSI PASSIVE INCOME',
+    description: 'Villa aktif menghasilkan sewa harian wisatawan di Kota Batu. Sangat cocok bagi Anda yang menginginkan aset hunian peristirahatan sekaligus investasi produktif.',
+    createdAt: '2026-03-07'
+  },
+
+  // 9. Blimbing - Tanah Kavling Siap Bangun
+  {
+    id: 'prop-mlg-9',
+    title: 'Tanah Kavling Siap Bangun Kawasan Araya',
     category: 'tanah',
-    categoryLabel: 'Tanah Komersial Kavling',
-    location: 'Boulevard Utama BSD City',
-    city: 'Tangerang Selatan',
-    price: 4800000000,
-    priceFormatted: 'Rp 4,8 Miliar',
-    installmentEstimate: 'Cash / Termin Developer',
+    categoryLabel: 'Tanah Kavling Residensial',
+    location: 'Pandanwangi - Araya, Blimbing',
+    city: 'Kota Malang',
+    district: 'Blimbing',
+    price: 495000000,
+    priceFormatted: 'Rp 495 Juta',
+    installmentEstimate: 'Cash / Bertahap 12x',
     specs: {
       bedrooms: 0,
       bathrooms: 0,
-      landArea: 320,
+      landArea: 100,
       buildingArea: 0,
       carport: 0,
-      certificate: 'HGB Komersial'
+      certificate: 'SHM Split'
     },
-    features: ['Izin Bangun Usaha / Kantor', 'Lebar Muka 16 Meter', 'Hadap Timur', 'Dekat Akses Tol Baru'],
+    features: ['Kontur Tanah Datar Padat', 'Lebar Depan 8 Meter', 'Akses Mobil Simpangan', 'Jaringan Listrik & Air Siap'],
     imageUrl: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80',
     galleryImages: [
       'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=800&q=80'
     ],
     isHot: false,
-    badge: 'INVESTASI EMAS',
-    description: 'Kavling komersial langka di jalan utama BSD. Cocok untuk membangun klinik estetika, head office perusahaan, atau kafe berkonsep garden.'
+    isSold: false,
+    badge: 'HARGA PERDANA',
+    description: 'Kavling tanah matang siap langsung bangun di perbatasan Pandanwangi dan Araya Blimbing Kota Malang. Legalitas aman SHM pecahan per bidang.',
+    createdAt: '2026-03-08'
   },
+
+  // 10. Sukun - Kebonsari (TERJUAL / SOLD SAMPLE)
   {
-    id: 'prop-13',
-    title: 'Rumah Tropis Modern Bintaro Sektor 9',
+    id: 'prop-mlg-10',
+    title: 'Rumah Asri Siap Huni Kebonsari Sukun',
     category: 'rumah-second',
-    categoryLabel: 'Rumah Mewah Siap Huni',
-    location: 'Bintaro Jaya Sektor 9',
-    city: 'Tangerang Selatan',
-    price: 2850000000,
-    priceFormatted: 'Rp 2,85 Miliar',
-    installmentEstimate: 'Rp 16,5 Jt/bln',
-    specs: {
-      bedrooms: 4,
-      bathrooms: 3,
-      landArea: 140,
-      buildingArea: 165,
-      carport: 2,
-      certificate: 'SHM Siap Notaris'
-    },
-    features: ['High Ceiling 4 Meter', 'Dekat Bintaro Xchange', 'Semi Furnished Jati', 'Kamar Tidur Utama Luas'],
-    imageUrl: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80',
-    galleryImages: [
-      'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80'
-    ],
-    isHot: true,
-    badge: 'HOT DEAL BINTARO',
-    description: 'Rumah impian di kawasan paling diminati Bintaro Sektor 9. Desain tropis modern dengan inner courtyard yang sejuk dan sirkulasi angin alami.'
-  },
-  {
-    id: 'prop-14',
-    title: 'Ruko 2 Lantai Pusat Kuliner Alam Sutera',
-    category: 'komersial',
-    categoryLabel: 'Ruko Kuliner & F&B',
-    location: 'Alam Sutera, Tangerang Selatan',
-    city: 'Tangerang Selatan',
-    price: 2100000000,
-    priceFormatted: 'Rp 2,1 Miliar',
-    installmentEstimate: 'Rp 12,2 Jt/bln',
-    specs: {
-      bedrooms: 1,
-      bathrooms: 2,
-      landArea: 75,
-      buildingArea: 135,
-      carport: 3,
-      certificate: 'HGB Murni'
-    },
-    features: ['Tenant F&B Ramai', 'Area Outdoor Dining', 'Dekat Kampus Binus & Mall', 'Air & Listrik Stabil'],
-    imageUrl: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80',
-    galleryImages: [
-      'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80'
-    ],
-    isHot: false,
-    badge: 'SIAP USAHA',
-    description: 'Ruko di sentra kuliner Alam Sutera dengan captive market ribuan mahasiswa dan penghuni apartemen sekitar. Kondisi rapi dan siap operasional.'
-  },
-  {
-    id: 'prop-15',
-    title: 'Townhouse Semi-Detached TB Simatupang',
-    category: 'rumah-baru',
-    categoryLabel: 'Townhouse Baru Jaksel',
-    location: 'TB Simatupang, Jakarta Selatan',
-    city: 'Jakarta Selatan',
-    price: 2700000000,
-    priceFormatted: 'Rp 2,7 Miliar',
-    installmentEstimate: 'Rp 15,6 Jt/bln',
-    specs: {
-      bedrooms: 3,
-      bathrooms: 3,
-      landArea: 88,
-      buildingArea: 130,
-      carport: 2,
-      certificate: 'SHM + IMB'
-    },
-    features: ['Akses Langsung Tol JORR', 'Rooftop Lounge Pribadi', 'Underground Utilities', 'Bebas Macet Perkantoran'],
-    imageUrl: 'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80',
-    galleryImages: [
-      'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80'
-    ],
-    isHot: true,
-    badge: 'DEKAT PERKANTORAN',
-    description: 'Townhouse modern semi-detached di koridor bisnis TB Simatupang. Pilihan sempurna untuk profesional mapan yang mengutamakan mobilitas.'
-  },
-  {
-    id: 'prop-16',
-    title: 'Rumah Cantik 1 Lantai Ciater Serpong',
-    category: 'rumah-second',
-    categoryLabel: 'Rumah 1 Lantai Nyaman',
-    location: 'Ciater Permai, BSD Tangsel',
-    city: 'Tangerang Selatan',
-    price: 720000000,
-    priceFormatted: 'Rp 720 Juta',
-    installmentEstimate: 'Rp 4,1 Jt/bln',
+    categoryLabel: 'Rumah Keluarga Nyaman',
+    location: 'Kebonsari, Sukun',
+    city: 'Kota Malang',
+    district: 'Sukun',
+    price: 525000000,
+    priceFormatted: 'Rp 525 Juta',
+    installmentEstimate: 'Rp 3,1 Jt/bln',
     specs: {
       bedrooms: 2,
       bathrooms: 1,
-      landArea: 72,
-      buildingArea: 50,
+      landArea: 70,
+      buildingArea: 55,
       carport: 1,
-      certificate: 'SHM Hak Milik'
+      certificate: 'SHM Lengkap'
     },
-    features: ['Rumah 1 Lantai Ramah Lansia', 'Halaman Belakang Luas', 'Bebas Banjir', 'Dekat Pasar Modern BSD'],
+    features: ['Lingkungan Tetangga Ramah', 'Dekat Pasar Tradisional Sukun', 'Air Sumur Bor Bening', 'Bebas Banjir'],
     imageUrl: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80',
     galleryImages: [
       'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80'
     ],
     isHot: false,
-    badge: 'HARGA DIBAWAH PASAR',
-    description: 'Rumah 1 lantai yang tenang dan nyaman, cocok untuk pasangan muda atau pensiunan. Lingkungan ramah bertetangga dengan keamanan 24 jam.'
+    isSold: true, // Sample sold property!
+    badge: 'SUDAH TERJUAL (SOLD)',
+    description: 'Rumah di Kebonsari Sukun Malang telah sukses terjual via proses KPR Bank BTN dengan pendampingan verifikasi data oleh Zahrani Property.',
+    createdAt: '2026-01-20'
   },
+
+  // 11. Klojen - Ruko Rampal Celaket
   {
-    id: 'prop-17',
-    title: 'Kavling Hook View Danau Sentul',
+    id: 'prop-mlg-11',
+    title: 'Ruko Strategis 2 Lantai Ring 1 Rampal Celaket',
+    category: 'komersial',
+    categoryLabel: 'Komersial / Kantor',
+    location: 'Rampal Celaket, Klojen',
+    city: 'Kota Malang',
+    district: 'Klojen',
+    price: 1950000000,
+    priceFormatted: 'Rp 1,95 Miliar',
+    installmentEstimate: 'Rp 11,2 Jt/bln',
+    specs: {
+      bedrooms: 1,
+      bathrooms: 2,
+      landArea: 80,
+      buildingArea: 140,
+      carport: 2,
+      certificate: 'SHM'
+    },
+    features: ['Dekat Stasiun Kotabaru Malang', 'Lalu Lintas Ramai Siang-Malam', 'Listrik 3500 Watt', 'Sangat Cocok Apotek / Praktek Dokter'],
+    imageUrl: 'https://images.unsplash.com/photo-1555636222-cae831e670b3?auto=format&fit=crop&w=800&q=80',
+    galleryImages: [
+      'https://images.unsplash.com/photo-1555636222-cae831e670b3?auto=format&fit=crop&w=800&q=80'
+    ],
+    isHot: true,
+    isSold: false,
+    badge: 'DEKAT STASIUN KOTA MALANG',
+    description: 'Ruko dua lantai di lokasi pusat kota Klojen. Akses sangat cepat ke Stasiun Malang Kotabaru, Alun-Alun Tugu, dan Balaikota Malang.',
+    createdAt: '2026-03-09'
+  },
+
+  // 12. Kedungkandang - Buring Hill View
+  {
+    id: 'prop-mlg-12',
+    title: 'Kavling View Perbukitan Buring Kedungkandang',
     category: 'tanah',
-    categoryLabel: 'Tanah Villa & Residensial',
-    location: 'Sentul City, Bogor',
-    city: 'Bogor / Sentul',
-    price: 850000000,
-    priceFormatted: 'Rp 850 Juta',
-    installmentEstimate: 'Cash / Cicil 12x',
+    categoryLabel: 'Tanah Villa Perkotaan',
+    location: 'Buring Hill, Kedungkandang',
+    city: 'Kota Malang',
+    district: 'Kedungkandang',
+    price: 360000000,
+    priceFormatted: 'Rp 360 Juta',
+    installmentEstimate: 'Cash Lunak 6x',
     specs: {
       bedrooms: 0,
       bathrooms: 0,
-      landArea: 210,
+      landArea: 90,
       buildingArea: 0,
       carport: 0,
-      certificate: 'SHGB Murni'
+      certificate: 'SHM'
     },
-    features: ['Posisi Hook 2 Muka', 'Udara Sejuk Pegunungan', 'Kontur Siap Bangun', 'Dekat AEON Sentul'],
+    features: ['Panorama Citylight Kota Malang', 'Hawa Sejuk Alami', 'Akses Dekat Ciputra CitraGarden', 'Jalan Paving 7 Meter'],
     imageUrl: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80',
     galleryImages: [
       'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80'
     ],
     isHot: false,
-    badge: 'VIEW PEGUNUNGAN',
-    description: 'Tanah kavling posisi hook dengan panorama perbukitan asri dan udara sejuk di Sentul City. Cocok untuk villa akhir pekan atau tempat tinggal masa pensiun.'
-  },
-  {
-    id: 'prop-18',
-    title: 'Neo Classic Cluster Cinere Gandul',
-    category: 'rumah-baru',
-    categoryLabel: 'Rumah Desain Neo Classic',
-    location: 'Cinere, Depok / Jaksel',
-    city: 'Depok / Jakarta Selatan',
-    price: 1480000000,
-    priceFormatted: 'Rp 1,48 Miliar',
-    installmentEstimate: 'Rp 8,5 Jt/bln',
-    specs: {
-      bedrooms: 3,
-      bathrooms: 3,
-      landArea: 84,
-      buildingArea: 90,
-      carport: 2,
-      certificate: 'SHM + IMB Pecah'
-    },
-    features: ['Fasad Megah Neo-Klasik', 'Kamar Mandi Dalam', 'Dekat Pintu Tol Brigif (Desari)', 'Free Kanopi & Smartlock'],
-    imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
-    galleryImages: [
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80'
-    ],
-    isHot: true,
-    badge: 'PROMO BULAN INI',
-    description: 'Cluster bergaya Neo Classic mewah di perbatasan Cinere dan Jakarta Selatan. Akses sangat cepat ke Tol Desari, dekat mall dan sekolah favorit.'
+    isSold: false,
+    badge: 'VIEW CITYLIGHT CANTIK',
+    description: 'Tanah kavling menghadap view citylight Kota Malang yang menawan di malam hari. Cocok untuk dibangun rumah peristirahatan modern.',
+    createdAt: '2026-03-10'
   }
 ];
+
+export const PROPERTIES = INITIAL_PROPERTIES;
