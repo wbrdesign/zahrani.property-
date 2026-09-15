@@ -1,5 +1,6 @@
 import React from 'react';
-import { ShieldCheck, Phone, Mail, MapPin, Heart } from 'lucide-react';
+import { ShieldCheck, Phone, Mail, MapPin, Heart, Lock } from 'lucide-react';
+import { usePropertyContext } from '../context/PropertyContext';
 import { CONSULTANT_INFO } from '../data/mockData';
 import { ActiveTab } from '../types';
 
@@ -14,6 +15,8 @@ export const DesktopFooter: React.FC<DesktopFooterProps> = ({
   onOpenSellModal,
   onOpenSurveyModal
 }) => {
+  const { consultant } = usePropertyContext();
+
   return (
     <footer className="bg-[#EEF4F2]/60 text-[#50666E] border-t border-[#D8E4E1] mt-12 pt-12 pb-16 sm:pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -32,11 +35,11 @@ export const DesktopFooter: React.FC<DesktopFooterProps> = ({
               </div>
             </div>
             <p className="text-xs text-[#50666E] leading-relaxed mb-3">
-              Solusi terpercaya menemukan hunian impian, ruko bisnis strategis, dan aset investasi terbaik dengan pendampingan penuh hingga KPR bank dan serah terima kunci.
+              Solusi terpercaya menemukan hunian impian, ruko bisnis strategis, dan aset investasi terbaik di Malang Raya dengan pendampingan penuh hingga KPR bank dan serah terima kunci.
             </p>
             <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white text-bm-teal text-[11px] font-semibold border border-[#D8E4E1] shadow-2xs">
               <ShieldCheck className="w-3.5 h-3.5 text-bm-teal" />
-              <span>{CONSULTANT_INFO.license}</span>
+              <span>{consultant.license || CONSULTANT_INFO.license}</span>
             </div>
           </div>
 
@@ -82,6 +85,16 @@ export const DesktopFooter: React.FC<DesktopFooterProps> = ({
                   Kontak & Lokasi Kantor
                 </button>
               </li>
+              <li className="pt-2">
+                <button
+                  type="button"
+                  onClick={() => onTabChange('admin')}
+                  className="inline-flex items-center gap-1.5 text-xs text-[#16282E] font-bold hover:text-bm-teal transition-colors bg-white px-2.5 py-1 rounded-lg border border-[#D8E4E1] shadow-2xs"
+                >
+                  <Lock className="w-3.5 h-3.5 text-bm-teal" />
+                  <span>Akses Backend Admin</span>
+                </button>
+              </li>
             </ul>
           </div>
 
@@ -110,7 +123,7 @@ export const DesktopFooter: React.FC<DesktopFooterProps> = ({
                 </button>
               </li>
               <li>
-                <span className="text-[#50666E]">Pengecekan Legalitas Sertifikat (BPN)</span>
+                <span className="text-[#50666E]">Pengecekan Legalitas Sertifikat (BPN Malang)</span>
               </li>
               <li>
                 <span className="text-[#50666E]">Bantuan Bunga Promo KPR 12+ Bank</span>
@@ -126,14 +139,14 @@ export const DesktopFooter: React.FC<DesktopFooterProps> = ({
             <div className="space-y-2.5 text-xs">
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-bm-teal shrink-0" />
-                <span className="text-[#16282E] font-medium">{CONSULTANT_INFO.phone}</span>
+                <span className="text-[#16282E] font-medium">{consultant.phone || CONSULTANT_INFO.phone}</span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-bm-teal shrink-0" />
-                <span className="text-[#16282E] font-medium">Kota Malang, Jawa Timur 65146</span>
+                <span className="text-[#16282E] font-medium">{consultant.location || CONSULTANT_INFO.location}</span>
               </div>
               <div className="text-[11px] text-[#50666E] pt-1">
-                Jam Operasional: {CONSULTANT_INFO.hours}
+                Jam Operasional: {consultant.hours || CONSULTANT_INFO.hours}
               </div>
             </div>
           </div>
@@ -141,10 +154,15 @@ export const DesktopFooter: React.FC<DesktopFooterProps> = ({
 
         {/* Bottom copyright line */}
         <div className="pt-6 border-t border-[#D8E4E1] text-center flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#50666E]">
-          <p>© {new Date().getFullYear()} Zahrani Property. Seluruh hak cipta dilindungi.</p>
-          <p className="flex items-center gap-1 text-[#50666E]">
-            Website Resmi Personal Branding Konsultan Properti Terpercaya
-          </p>
+          <p>© {new Date().getFullYear()} Zahrani Property Kota Malang. Seluruh hak cipta dilindungi.</p>
+          <button
+            type="button"
+            onClick={() => onTabChange('admin')}
+            className="flex items-center gap-1 text-[#50666E] hover:text-[#16282E] transition-colors"
+          >
+            <Lock className="w-3 h-3 text-bm-teal" />
+            <span>Panel Pengelola Admin (Bismillah99)</span>
+          </button>
         </div>
       </div>
     </footer>
