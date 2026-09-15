@@ -5,15 +5,15 @@ export interface Property {
   categoryLabel: string;
   location: string;
   city: string;
-  district?: string;
-  price: number;
+  district?: string; // Kecamatan/Wilayah (cth: Lowokwaru, Klojen, Blimbing, Sukun, Kedungkandang, Batu)
+  price: number; // in IDR
   priceFormatted: string;
   installmentEstimate: string;
   specs: {
     bedrooms: number;
     bathrooms: number;
-    landArea: number;
-    buildingArea: number;
+    landArea: number; // m2
+    buildingArea: number; // m2
     carport: number;
     certificate: string;
   };
