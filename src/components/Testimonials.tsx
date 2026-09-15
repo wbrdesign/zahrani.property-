@@ -22,7 +22,7 @@ export const Testimonials: React.FC = () => {
             className="p-4 sm:p-5 rounded-2xl bg-white border border-[#D8E4E1] shadow-2xs hover:shadow-md transition-shadow flex flex-col justify-between"
           >
             <div>
-              {/* Baris Atas: Nama Klien & Bintang Rating */}
+              {/* Top row: Client Name & Rating */}
               <div className="flex items-center justify-between gap-2 mb-3">
                 <div>
                   <div className="flex items-center gap-1.5">
@@ -34,7 +34,7 @@ export const Testimonials: React.FC = () => {
                   )}
                 </div>
 
-                {/* Bintang Rating */}
+                {/* Stars */}
                 <div className="flex items-center gap-0.5">
                   {Array.from({ length: testi.rating }).map((_, i) => (
                     <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
@@ -42,13 +42,13 @@ export const Testimonials: React.FC = () => {
                 </div>
               </div>
 
-              {/* Teks Ulasan */}
+              {/* Review text */}
               <p className="text-xs sm:text-sm text-[#2B454E] leading-relaxed italic mb-3">
                 "{testi.review}"
               </p>
             </div>
 
-            {/* Label Properti yang Dibeli */}
+            {/* Property Bought Tag */}
             <div className="inline-block px-3 py-1.5 rounded-xl bg-[#EEF4F2] text-bm-teal text-[10px] sm:text-xs font-semibold border border-[#D8E4E1] self-start">
               Transaksi: {testi.propertyBought}
             </div>
