@@ -1,60 +1,41 @@
-import React from 'react';
-import { Star, CheckCircle } from 'lucide-react';
-import { TESTIMONIALS } from '../data/mockData';
+import { Testimonial } from '../types';
 
-export const Testimonials: React.FC = () => {
-  return (
-    <section className="py-4 sm:py-6">
-      <div className="flex items-center justify-between mb-4 px-1">
-        <div>
-          <h2 className="text-sm sm:text-base font-extrabold text-[#16282E] tracking-tight flex items-center gap-2">
-            <span className="w-1.5 h-4 sm:h-5 bg-bm-teal rounded-full inline-block"></span>
-            Testimoni & Transaksi Sukses
-          </h2>
-          <p className="text-[11px] sm:text-xs text-[#50666E]">Pengalaman nyata para klien Zahrani Property</p>
-        </div>
-      </div>
+/**
+ * =======================================================================
+ * DATA TESTIMONI KLIEN ZAHRANI PROPERTY
+ * =======================================================================
+ * Tambahkan atau edit ulasan pelanggan di sini.
+ */
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
-        {TESTIMONIALS.map((testi) => (
-          <div
-            key={testi.id}
-            className="p-4 sm:p-5 rounded-2xl bg-white border border-[#D8E4E1] shadow-2xs hover:shadow-md transition-shadow flex flex-col justify-between"
-          >
-            <div>
-              {/* Top row: Client Name & Rating */}
-              <div className="flex items-center justify-between gap-2 mb-3">
-                <div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-xs sm:text-sm font-bold text-[#16282E]">{testi.name}</span>
-                    <CheckCircle className="w-3.5 h-3.5 text-bm-teal fill-[#EEF4F2]" />
-                  </div>
-                  {testi.occupation && (
-                    <span className="text-[10px] sm:text-[11px] text-[#50666E] block mt-0.5">{testi.occupation}</span>
-                  )}
-                </div>
-
-                {/* Stars */}
-                <div className="flex items-center gap-0.5">
-                  {Array.from({ length: testi.rating }).map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-              </div>
-
-              {/* Review text */}
-              <p className="text-xs sm:text-sm text-[#2B454E] leading-relaxed italic mb-3">
-                "{testi.review}"
-              </p>
-            </div>
-
-            {/* Property Bought Tag */}
-            <div className="inline-block px-3 py-1.5 rounded-xl bg-[#EEF4F2] text-bm-teal text-[10px] sm:text-xs font-semibold border border-[#D8E4E1] self-start">
-              Transaksi: {testi.propertyBought}
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-};
+export const TESTIMONIALS: Testimonial[] = [
+  {
+    id: 't1',
+    name: 'Bpk. Hendra & Ibu Dian',
+    occupation: 'Karyawan Swasta & Guru',
+    review: 'Awalnya ragu KPR bisa disetujui karena berkas mepet. Bu Zahrani bantu dari nol, rekomendasi bank syariah terbaik, sampai akad lancar. Layanan sangat ramah!',
+    propertyBought: 'Cluster Mewah Araya Malang',
+    rating: 5,
+    avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80',
+    verifiedTransaction: true
+  },
+  {
+    id: 't2',
+    name: 'dr. Satria Wibowo',
+    occupation: 'Dokter Spesialis',
+    review: 'Titip jual ruko di Soekarno Hatta lewat Zahrani Property cuma butuh waktu 3 minggu langsung laku dengan harga di atas target awal. Profesional dan transparan.',
+    propertyBought: 'Ruko Bisnis Soekarno-Hatta Malang',
+    rating: 5,
+    avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80',
+    verifiedTransaction: true
+  },
+  {
+    id: 't3',
+    name: 'Agnes Pramudita',
+    occupation: 'First Home Buyer (Tech Lead)',
+    review: 'Tidak ada biaya agen sama sekali untuk pembeli! Zahrani sangat sabar mengantar survei sampai 4 lokasi berbeda di Malang Raya saat weekend tanpa paksaan.',
+    propertyBought: 'Rumah Scandinavian Dieng Malang',
+    rating: 5,
+    avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80',
+    verifiedTransaction: true
+  }
+];
