@@ -83,7 +83,7 @@ Apakah di waktu tersebut Bu Zahrani available untuk mendampingi? Terima kasih!`;
                   {p.title} ({p.location})
                 </option>
               ))}
-              <option value="Properti Lain di Area BSD / Bintaro">Area Lain di BSD / Bintaro</option>
+              <option value="Properti Lain di Area Kota Malang & Sekitarnya">Area Lain di Kota Malang & Sekitarnya</option>
               <option value="Konsultasi Lokasi Rekomendasi">Butuh Rekomendasi Lokasi Baru</option>
             </select>
           </div>
