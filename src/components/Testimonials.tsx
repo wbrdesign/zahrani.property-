@@ -22,21 +22,16 @@ export const Testimonials: React.FC = () => {
             className="p-4 sm:p-5 rounded-2xl bg-white border border-[#D8E4E1] shadow-2xs hover:shadow-md transition-shadow flex flex-col justify-between"
           >
             <div>
-              {/* Top row: Avatar + Name + Rating */}
+              {/* Top row: Client Name & Rating */}
               <div className="flex items-center justify-between gap-2 mb-3">
-                <div className="flex items-center gap-2.5">
-                  <img
-                    src={testi.avatarUrl}
-                    alt={testi.name}
-                    className="w-11 h-11 rounded-full object-cover ring-2 ring-[#EEF4F2]"
-                  />
-                  <div>
-                    <div className="flex items-center gap-1">
-                      <span className="text-xs sm:text-sm font-bold text-[#16282E]">{testi.name}</span>
-                      <CheckCircle className="w-3.5 h-3.5 text-bm-teal fill-[#EEF4F2]" />
-                    </div>
-                    <span className="text-[10px] sm:text-[11px] text-[#50666E] block">{testi.occupation}</span>
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-xs sm:text-sm font-bold text-[#16282E]">{testi.name}</span>
+                    <CheckCircle className="w-3.5 h-3.5 text-bm-teal fill-[#EEF4F2]" />
                   </div>
+                  {testi.occupation && (
+                    <span className="text-[10px] sm:text-[11px] text-[#50666E] block mt-0.5">{testi.occupation}</span>
+                  )}
                 </div>
 
                 {/* Stars */}
