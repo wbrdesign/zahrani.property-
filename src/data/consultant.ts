@@ -9,22 +9,22 @@
  */
 
 export const CONSULTANT_INFO = {
-  name: 'Zahrani, S.Ars',
+  name: 'Zahrani',
   brandName: 'Zahrani Property',
   title: 'Senior Property Consultant & KPR Specialist',
   license: 'AREBI Certified Advisor #ZR-8849',
   phone: '0857-8290-9742',
   whatsappNumber: '6285782909742',
-  email: 'zahrani.property@gmail.com',
-  location: 'Jakarta Selatan & BSD - Tangerang',
-  experienceYears: '8+ Tahun',
+  email: 'ranitrilestari90@gmail.com',
+  location: 'Jl. Raya Langsep No.11, Bareng, Kec. Klojen, Kota Malang, Jawa Timur 65146',
+  experienceYears: '10+ Tahun',
   soldCount: '140+ Unit',
   rating: '4.9',
   reviewCount: '128',
-  // Foto profil utama (tersimpan di folder public/avatar.jpg):
-  avatar: '/avatar.jpg',
+  // Foto profil utama (tersimpan di folder public/zahrani.jpg):
+  avatar: '/zahrani.jpg',
   bio: 'Membantu Anda menemukan rumah idaman, ruko komersial, & aset investasi properti terbaik. Pendampingan menyeluruh dari cek sertifikat, negosiasi harga terbaik, hingga persetujuan KPR bank.',
-  hours: '08:00 - 21:00 WIB (Setiap Hari)',
+  hours: '08:00AM - 6:00PM (Setiap Hari)',
   socials: {
     instagram: '@zahrani.property',
     tiktok: '@zahraniproperty',
