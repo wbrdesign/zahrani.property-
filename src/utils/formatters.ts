@@ -69,3 +69,12 @@ export function createWhatsAppLink(phoneNumber: string, message: string): string
   const cleanPhone = phoneNumber.replace(/[^0-9]/g, '');
   return `https://wa.me/${cleanPhone}?text=${encodedMsg}`;
 }
+
+export function getQuickInstallmentEstimate(price: number): string {
+  if (!price || price <= 0) return '-';
+  const { monthlyInstallment } = calculateKprMonthly(price, 10, 4.25, 20);
+  if (monthlyInstallment >= 1_000_000) {
+    return `Rp ${(monthlyInstallment / 1_000_000).toFixed(1)} Jt/bln`;
+  }
+  return `${formatRupiah(monthlyInstallment)}/bln`;
+}
