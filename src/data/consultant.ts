@@ -22,7 +22,7 @@ export const CONSULTANT_INFO = {
   rating: '4.9',
   reviewCount: '128',
   // Foto profil utama (tersimpan di folder public/zahrani.jpg):
-  avatar: '/zahrani.jpg',
+  avatar: './zahrani.jpg',
   bio: 'Membantu Anda menemukan rumah idaman, ruko komersial, & aset investasi properti terbaik. Pendampingan menyeluruh dari cek sertifikat, negosiasi harga terbaik, hingga persetujuan KPR bank.',
   hours: '08:00AM - 6:00PM (Setiap Hari)',
   socials: {
