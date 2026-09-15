@@ -1,0 +1,17 @@
+# Folder Foto Properti (public/properties)
+
+Folder ini khusus digunakan untuk menyimpan file foto listing properti Anda yang di-upload ke GitHub.
+
+## Cara Menggunakan Foto di Sini:
+
+1. **Upload foto** Anda ke folder ini di GitHub (misalnya: `rumah-bsd.jpg`, `interior-bsd.jpg`).
+2. Buka file data listing di: `src/data/listings.ts`.
+3. Tuliskan path fotonya seperti contoh berikut:
+   ```ts
+   imageUrl: '/properties/rumah-bsd.jpg',
+   galleryImages: [
+     '/properties/rumah-bsd.jpg',
+     '/properties/interior-bsd.jpg'
+   ]
+   ```
+4. Selesai! Foto akan otomatis tampil di website saat Anda melakukan commit ke GitHub.
