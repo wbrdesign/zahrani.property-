@@ -15,7 +15,9 @@ import {
   RotateCcw
 } from 'lucide-react';
 import { CONSULTANT_INFO } from '../data/mockData';
+import { usePropertyContext } from '../context/PropertyContext';
 import { createWhatsAppLink } from '../utils/formatters';
+import { processImageFile } from '../utils/imageUpload';
 
 interface ConsultantHeroProps {
   onExploreListings: () => void;
@@ -34,29 +36,40 @@ export const ConsultantHero: React.FC<ConsultantHeroProps> = ({
   onUploadAvatar,
   onResetAvatar
 }) => {
+  const { consultant, homeConfig } = usePropertyContext();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const currentAvatar = avatarUrl || CONSULTANT_INFO.avatar;
-  const isCustomAvatar = Boolean(avatarUrl && avatarUrl !== CONSULTANT_INFO.avatar);
+  
+  const displayAvatar = avatarUrl || consultant.avatar || consultant.avatarUrl || CONSULTANT_INFO.avatar;
+  const isCustomAvatar = Boolean(avatarUrl && avatarUrl !== (consultant.avatar || CONSULTANT_INFO.avatar));
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (typeof reader.result === 'string' && onUploadAvatar) {
-        onUploadAvatar(reader.result);
+    try {
+      const compressedDataUrl = await processImageFile(file, 600, 600, 0.85);
+      if (onUploadAvatar) {
+        onUploadAvatar(compressedDataUrl);
       }
-    };
-    reader.readAsDataURL(file);
+    } catch (err) {
+      console.error('Gagal memproses avatar:', err);
+    }
   };
 
   const directConsultWa = createWhatsAppLink(
-    CONSULTANT_INFO.whatsappNumber,
-    `Halo Ibu ${CONSULTANT_INFO.name}, saya ingin konsultasi pencarian properti dan informasi unit pilihan di Zahrani Property.`
+    consultant.whatsappNumber || consultant.whatsapp || '6285782909742',
+    `Halo Ibu ${consultant.name}, saya ingin konsultasi pencarian properti dan informasi unit pilihan di Zahrani Property Malang.`
   );
 
   return (
-    <section className="pt-2 sm:pt-4 pb-2">
+    <section className="pt-2 sm:pt-4 pb-2 space-y-3">
+      {/* Dynamic Announcement Banner if enabled in Admin Home */}
+      {homeConfig.isAnnouncementActive && homeConfig.announcementText && (
+        <div className="bg-bm-teal text-white px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 shadow-xs animate-in fade-in text-center">
+          <Sparkles className="w-4 h-4 text-[#D8E4E1] shrink-0" />
+          <span>{homeConfig.announcementText}</span>
+        </div>
+      )}
+
       <div className="bg-[#EEF4F2] rounded-3xl p-6 sm:p-10 lg:p-12 text-[#16282E] shadow-xs relative overflow-hidden border border-[#D8E4E1]">
         {/* Glow ambient background lights in In Your Eyes (715) and Cable Knit Sweater (CSP-650) */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-[#D8E4E1]/60 rounded-full blur-3xl pointer-events-none" />
@@ -68,7 +81,7 @@ export const ConsultantHero: React.FC<ConsultantHeroProps> = ({
           {/* Top Status & Accreditation Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white text-[#16282E] text-xs font-semibold border border-[#D8E4E1] shadow-2xs mb-5">
             <Award className="w-3.5 h-3.5 text-bm-teal" />
-            <span>{CONSULTANT_INFO.license}</span>
+            <span>{consultant.license || homeConfig.stats.license || 'AREBI Certified Advisor #ZR-8849'}</span>
             <span className="w-1 h-1 rounded-full bg-[#8EA79C]" />
             <span className="text-[#16282E] font-bold flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-bm-sage animate-pulse" />
@@ -84,8 +97,8 @@ export const ConsultantHero: React.FC<ConsultantHeroProps> = ({
             {/* Foto Lingkaran Utama */}
             <div className="relative w-28 h-28 sm:w-36 sm:h-36 rounded-full overflow-hidden ring-4 ring-white ring-offset-2 ring-offset-bm-teal shadow-xl bg-slate-100">
               <img
-                src={currentAvatar}
-                alt={CONSULTANT_INFO.name}
+                src={displayAvatar}
+                alt={consultant.name}
                 className="w-full h-full object-cover object-top scale-105 group-hover:scale-110 transition-transform duration-500"
               />
 
@@ -142,21 +155,21 @@ export const ConsultantHero: React.FC<ConsultantHeroProps> = ({
           {/* Nama Konsultan & Title (Center) */}
           <div className="space-y-1 mb-4">
             <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-[#16282E] leading-tight">
-              {CONSULTANT_INFO.name}
+              {consultant.name}
             </h1>
             <p className="text-xs sm:text-base text-bm-teal font-bold tracking-wide">
-              {CONSULTANT_INFO.title}
+              {consultant.title}
             </p>
             <div className="inline-flex items-center justify-center gap-1.5 text-xs text-[#50666E] pt-0.5">
               <MapPin className="w-3.5 h-3.5 text-bm-teal shrink-0" />
-              <span>Area Layanan: {CONSULTANT_INFO.location}</span>
+              <span>Area Layanan: {consultant.location}</span>
             </div>
           </div>
 
           {/* Statement Bio (Center Box) */}
           <div className="bg-white/90 backdrop-blur-xs rounded-2xl p-4 sm:p-5 border border-[#D8E4E1] mb-6 max-w-2xl shadow-2xs">
             <p className="text-xs sm:text-sm text-[#3E5259] leading-relaxed italic">
-              "{CONSULTANT_INFO.bio}"
+              "{homeConfig.heroBio || consultant.bio}"
             </p>
           </div>
 
@@ -164,7 +177,7 @@ export const ConsultantHero: React.FC<ConsultantHeroProps> = ({
           <div className="grid grid-cols-3 gap-2 sm:gap-6 w-full max-w-xl py-3.5 px-3 sm:px-6 mb-7 bg-white/95 rounded-2xl border border-[#D8E4E1] shadow-2xs">
             <div className="text-center">
               <div className="text-lg sm:text-2xl font-black text-[#16282E]">
-                {CONSULTANT_INFO.experienceYears}
+                {homeConfig.stats.experienceYears || consultant.experienceYears}
               </div>
               <div className="text-[10px] sm:text-xs text-[#50666E] uppercase tracking-wider font-semibold mt-0.5">
                 Pengalaman
@@ -173,7 +186,7 @@ export const ConsultantHero: React.FC<ConsultantHeroProps> = ({
 
             <div className="text-center border-x border-[#D8E4E1]">
               <div className="text-lg sm:text-2xl font-black text-bm-teal">
-                {CONSULTANT_INFO.soldCount}
+                {homeConfig.stats.soldCount || consultant.soldCount}
               </div>
               <div className="text-[10px] sm:text-xs text-[#50666E] uppercase tracking-wider font-semibold mt-0.5">
                 Unit Terjual
@@ -183,10 +196,10 @@ export const ConsultantHero: React.FC<ConsultantHeroProps> = ({
             <div className="text-center">
               <div className="flex items-center justify-center gap-1 text-lg sm:text-2xl font-black text-[#16282E]">
                 <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-                <span>{CONSULTANT_INFO.rating}</span>
+                <span>{homeConfig.stats.rating || consultant.rating}</span>
               </div>
               <div className="text-[10px] sm:text-xs text-[#50666E] uppercase tracking-wider font-semibold mt-0.5">
-                {CONSULTANT_INFO.reviewCount}+ Klien Puas
+                {homeConfig.stats.reviewCount || consultant.reviewCount}+ Klien Puas
               </div>
             </div>
           </div>
