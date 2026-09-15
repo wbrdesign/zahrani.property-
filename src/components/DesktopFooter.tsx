@@ -130,7 +130,7 @@ export const DesktopFooter: React.FC<DesktopFooterProps> = ({
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-bm-teal shrink-0" />
-                <span className="text-[#16282E] font-medium">Jakarta Selatan, BSD & Tangerang Selatan</span>
+                <span className="text-[#16282E] font-medium">Kota Malang, Jawa Timur 65146</span>
               </div>
               <div className="text-[11px] text-[#50666E] pt-1">
                 Jam Operasional: {CONSULTANT_INFO.hours}
