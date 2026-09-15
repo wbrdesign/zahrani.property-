@@ -9,9 +9,9 @@
  */
 
 export const CONSULTANT_INFO = {
-  name: 'Zahrani',
+  name: 'Zahrani Property',
   brandName: 'Zahrani Property',
-  title: 'Senior Property Consultant & KPR Specialist',
+  title: 'Property Investment Advisor & KPR Specialist',
   license: 'AREBI Certified Advisor #ZR-8849',
   phone: '0857-8290-9742',
   whatsappNumber: '6285782909742',
